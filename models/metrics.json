@@ -1,0 +1,78 @@
+{
+  "dataset_stats": {
+    "total_records": 1200,
+    "train_samples": 960,
+    "test_samples": 240,
+    "fraudulent_samples": 550,
+    "genuine_samples": 650,
+    "features_extracted": 4000
+  },
+  "selected_model": "Logistic Regression",
+  "models_evaluated": {
+    "Logistic Regression": {
+      "accuracy": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1_score": 1.0,
+      "roc_auc": 1.0,
+      "confusion_matrix": {
+        "tn": 130,
+        "fp": 0,
+        "fn": 0,
+        "tp": 110
+      }
+    },
+    "Random Forest": {
+      "accuracy": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1_score": 1.0,
+      "roc_auc": 1.0,
+      "confusion_matrix": {
+        "tn": 130,
+        "fp": 0,
+        "fn": 0,
+        "tp": 110
+      }
+    },
+    "Multinomial Naive Bayes": {
+      "accuracy": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1_score": 1.0,
+      "roc_auc": 1.0,
+      "confusion_matrix": {
+        "tn": 130,
+        "fp": 0,
+        "fn": 0,
+        "tp": 110
+      }
+    },
+    "Linear SVM": {
+      "accuracy": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1_score": 1.0,
+      "roc_auc": 1.0,
+      "confusion_matrix": {
+        "tn": 130,
+        "fp": 0,
+        "fn": 0,
+        "tp": 110
+      }
+    },
+    "Gradient Boosting": {
+      "accuracy": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1_score": 1.0,
+      "roc_auc": 1.0,
+      "confusion_matrix": {
+        "tn": 130,
+        "fp": 0,
+        "fn": 0,
+        "tp": 110
+      }
+    }
+  }
+}
