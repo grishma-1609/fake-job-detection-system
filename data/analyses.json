@@ -1,1 +1,314 @@
-[]
+[
+  {
+    "user_id": "anonymous",
+    "job_data": {
+      "title": "Graduate Trainee – Cyber Security",
+      "company": "Unspecified Employer",
+      "location": "Unspecified",
+      "salary": "Unspecified",
+      "employment_type": "Other",
+      "experience": "Not Applicable",
+      "education": "Unspecified",
+      "description": "Apex Infotech Services Private Limited\nFull-time\nFresher\nHyderabad\n\n\nSalary: ₹5.2–7.5 LPA\n\nExperience: 0–1 year\n\nQualification: B.Tech / B.E. in CSE, IT, or Cybersecurity\n\nJob ID: ATS-CYB-261047\n\nJob description\n\nWe are looking for motivated graduates to join our cybersecurity operations team. Candidates will assist in security monitoring, vulnerability assessments, incident response, and threat intelligence analysis.\n\nResponsibilities\n- Monitor SIEM alerts and investigate suspicious activities.\n- Perform vulnerability scans using Nmap.\n- Assist with incident reports and security documentation.\n- Analyze network logs and support threat detection.\nRequired skills\n- Networking and Linux fundamentals.\n- Basic Python scripting.\n- Familiarity with Splunk or IBM QRadar.\n- Knowledge of cybersecurity principles.\nRecruitment process\n1. Resume screening.\n2. Online technical assessment.\n3. Technical interview.\n4. HR interview.\nApplication deadline: 30 October 2026.\n\nRecruitment email: careers@apexinfotech.test\n\n",
+      "requirements": "",
+      "benefits": "",
+      "email": "",
+      "website": "",
+      "url": "https://apexinfotech.example/careers/ATS-CYB-261047"
+    },
+    "prediction": "Suspicious — Further Verification Required",
+    "risk_score": 7.0,
+    "risk_level": "HIGH",
+    "confidence": 75.0,
+    "scam_categories": [],
+    "red_flags": [
+      "ML textual model noted linguistic similarity to known scam corpora (27.8%)",
+      "URL: The domain 'apexinfotech.example' is an RFC 2606 / RFC 6761 reserved domain for documentation/testing. It cannot receive live job applications.",
+      "Domain/Identity: Company information could not be independently verified (insufficient corporate contact records). External corporate verification service is unavailable. This uncertainty alone does not indicate fraud."
+    ],
+    "trust_indicators": [
+      "Comprehensive, detailed job responsibilities and qualification criteria"
+    ],
+    "score_breakdown": [
+      {
+        "component": "ML Linguistic Fraud Probability",
+        "points": 7.0,
+        "max": 25,
+        "details": "Model probability of fraudulent text: 27.8% (linguistic style indicator only)"
+      }
+    ],
+    "recommended_action": "DO NOT ENGAGE: Cease all communication immediately. Never send money, pay registration or equipment fees, deposit checks, or disclose banking, UPI, or passport details. Legitimate employers will never ask for upfront payments. Report this posting to cybercrime authorities and the host platform. (Note: Assessment is decision-support, not an absolute guarantee).",
+    "ml_result": {
+      "prediction": "FAKE",
+      "fraud_probability": 0.278,
+      "confidence": 57.8,
+      "threshold": 0.2,
+      "status": "Inference successful"
+    },
+    "url_analysis": {
+      "analyzed": true,
+      "status": "Analysis completed",
+      "url": "https://apexinfotech.example/careers/ATS-CYB-261047",
+      "domain": "apexinfotech.example",
+      "url_validity": "Reserved Domain (Invalid for live applications)",
+      "url_validity_details": "The domain 'apexinfotech.example' is an RFC 2606 / RFC 6761 reserved domain for documentation/testing. It cannot receive live job applications.",
+      "is_reserved_domain": true,
+      "is_live_valid": false,
+      "https_active": true,
+      "url_length": 51,
+      "subdomain_count": 0,
+      "is_ip_literal": false,
+      "is_shortened": false,
+      "is_free_form": false,
+      "company_mismatch": true,
+      "network_status": "Reserved RFC 2606 domain (network probe skipped)",
+      "redirect_count": 0,
+      "final_url": "https://apexinfotech.example/careers/ATS-CYB-261047",
+      "risk_points": 20,
+      "is_safe": false,
+      "flags": [
+        "Application link host 'apexinfotech.example' does not match claimed employer 'Unspecified Employer'",
+        "Reserved domain (apexinfotech.example) under RFC 2606 / RFC 6761 (invalid for live application submission)"
+      ],
+      "uncertainty_warning": "Application link uses an RFC reserved documentation domain."
+    },
+    "company_verification": {
+      "verified": false,
+      "verification_status": "UNVERIFIED",
+      "company_name": "Unspecified Employer",
+      "website_domain": "",
+      "email_domain": "",
+      "is_free_email": false,
+      "email_web_match": false,
+      "company_web_consistent": false,
+      "domain_resolves": true,
+      "risk_points": 0,
+      "summary": "Company information could not be independently verified (insufficient corporate contact records). External corporate verification service is unavailable. This uncertainty alone does not indicate fraud.",
+      "flags": [],
+      "trust_signals": [],
+      "uncertainty_warning": "External corporate verification service unavailable."
+    },
+    "explanation": {
+      "summary": "Classification is 'Suspicious — Further Verification Required': The posting triggered documented cybersecurity fraud rules, deceptive indicators, or conflicting evidence. ML model observed conventional professional vocabulary (72.2% genuine text score). Security indicators observed: ML textual model noted linguistic similarity to known scam corpora (27.8%); URL: The domain 'apexinfotech.example' is an RFC 2606 / RFC 6761 reserved domain for documentation/testing. It cannot receive live job applications.; Domain/Identity: Company information could not be independently verified (insufficient corporate contact records). External corporate verification service is unavailable. This uncertainty alone does not indicate fraud.. Supporting integrity elements: Comprehensive, detailed job responsibilities and qualification criteria.",
+      "narrative_points": [
+        "Classification is 'Suspicious — Further Verification Required': The posting triggered documented cybersecurity fraud rules, deceptive indicators, or conflicting evidence.",
+        "ML model observed conventional professional vocabulary (72.2% genuine text score).",
+        "Security indicators observed: ML textual model noted linguistic similarity to known scam corpora (27.8%); URL: The domain 'apexinfotech.example' is an RFC 2606 / RFC 6761 reserved domain for documentation/testing. It cannot receive live job applications.; Domain/Identity: Company information could not be independently verified (insufficient corporate contact records). External corporate verification service is unavailable. This uncertainty alone does not indicate fraud..",
+        "Supporting integrity elements: Comprehensive, detailed job responsibilities and qualification criteria."
+      ],
+      "top_risk_tokens": [
+        [
+          "interview",
+          0.063
+        ],
+        [
+          "online",
+          0.059
+        ],
+        [
+          "job",
+          0.055
+        ],
+        [
+          "private",
+          0.053
+        ],
+        [
+          "candidates",
+          0.05
+        ]
+      ],
+      "top_trust_tokens": [
+        [
+          "technical",
+          0.086
+        ],
+        [
+          "incident",
+          0.062
+        ],
+        [
+          "threat",
+          0.062
+        ],
+        [
+          "and",
+          0.059
+        ],
+        [
+          "in",
+          0.059
+        ]
+      ],
+      "disclaimer": "Notice: Feature importance, ML probabilities, and risk assessments represent probabilistic decision-support insights based on machine learning and heuristic cybersecurity rules. None of the outcomes (Likely Genuine, Suspicious — Further Verification Required, Insufficient Evidence) is an absolute legal guarantee of authenticity or fraud."
+    },
+    "id": "c6aa5075-d378-46de-b8e1-5d1230d3e375",
+    "created_at": "2026-10-27T15:47:59.495821Z",
+    "updated_at": "2026-10-27T15:47:59.495821Z"
+  },
+  {
+    "user_id": "anonymous",
+    "job_data": {
+      "title": "Junior Oracle Database Administrator",
+      "company": "Unspecified Employer",
+      "location": "Unspecified",
+      "salary": "Unspecified",
+      "employment_type": "Other",
+      "experience": "Not Applicable",
+      "education": "Unspecified",
+      "description": "Match Profiler is an Information Systems consultant who has been working in the national and international market since 1999. We have multidisciplinary skills and IT know-how that allow us to contribute, optimize and progress with our clients. We are currently recruiting, for integration in our internal team/client, professionals with the following profile:\nJunior Oracle Database Administrator- Hybrid (2 days/week - Sintra)\nWe are looking for a Junior Oracle Database Administrator to join our team and support the administration, maintenance, and monitoring of Oracle database environments.\nRequirements\n1–2 years of experience working with Oracle databases.\nGood knowledge of SQL and relational databases.\nBasic knowledge of Oracle Database administration.\nFamiliarity with database monitoring, backup, and recovery concepts.\nBasic knowledge of performance troubleshooting.\nGood problem-solving and analytical skills.\nAbility to work in a team and communicate effectively.\nGood level of English.\n\nSoft skills\nGood communication\nTeam spirit\nProactivity\nTime management\n\nWhat we can offer:\nPersonalized support from your team\nYour manager will take into consideration your motivations and suggestions\nVictories will be celebrated together\nYour HR and Support Teams will always be available to help\nConstant feedback on your work\nA network of hundreds of partnerships with companies from numerous sectors that offer you exclusive discounts (health, well-being, travel, gastronomy, culture, leisure, training, etc)\nAnd, of course, many gatherings and social event",
+      "requirements": "",
+      "benefits": "",
+      "email": "",
+      "website": "",
+      "url": "https://www.linkedin.com/jobs/view/4476316649/"
+    },
+    "prediction": "Insufficient Evidence",
+    "risk_score": 0.0,
+    "risk_level": "LOW",
+    "confidence": 75.0,
+    "scam_categories": [],
+    "red_flags": [
+      "ML textual model noted linguistic similarity to known scam corpora (37.6%)",
+      "Domain/Identity: Company information could not be independently verified (insufficient corporate contact records). External corporate verification service is unavailable. This uncertainty alone does not indicate fraud."
+    ],
+    "trust_indicators": [
+      "Application URL utilizes secure TLS/HTTPS on an active, established domain",
+      "Comprehensive, detailed job responsibilities and qualification criteria"
+    ],
+    "score_breakdown": [
+      {
+        "component": "ML Linguistic Fraud Probability",
+        "points": 9.4,
+        "max": 25,
+        "details": "Model probability of fraudulent text: 37.6% (linguistic style indicator only)"
+      },
+      {
+        "component": "Authenticity Trust Credits",
+        "points": -10.0,
+        "max": 0,
+        "details": "Deducted for 2 verified authentic trust attributes."
+      }
+    ],
+    "recommended_action": "INDEPENDENT VERIFICATION REQUIRED: Posting does not display explicit fraud demands, but lacks verifiable corporate contact channels or live application infrastructure. Before submitting resumes or personal information, independently locate and verify the employer via official corporate directories or primary websites. Do not treat this posting as guaranteed authentic or fraudulent.",
+    "ml_result": {
+      "prediction": "FAKE",
+      "fraud_probability": 0.3758,
+      "confidence": 67.6,
+      "threshold": 0.2,
+      "status": "Inference successful"
+    },
+    "url_analysis": {
+      "analyzed": true,
+      "status": "Analysis completed",
+      "url": "https://www.linkedin.com/jobs/view/4476316649/",
+      "domain": "www.linkedin.com",
+      "url_validity": "Valid Live URL (Reachable & Secure)",
+      "url_validity_details": "Application link is reachable, uses TLS encryption, and resolves to an established domain.",
+      "is_reserved_domain": false,
+      "is_live_valid": true,
+      "https_active": true,
+      "url_length": 46,
+      "subdomain_count": 1,
+      "is_ip_literal": false,
+      "is_shortened": false,
+      "is_free_form": false,
+      "company_mismatch": false,
+      "network_status": "HTTP 200 reachable",
+      "redirect_count": 1,
+      "final_url": "https://pt.linkedin.com/jobs/view/junior-oracle-database-administrator-at-match-profiler-4476316649",
+      "risk_points": 0,
+      "is_safe": true,
+      "flags": [],
+      "uncertainty_warning": null
+    },
+    "company_verification": {
+      "verified": false,
+      "verification_status": "UNVERIFIED",
+      "company_name": "Unspecified Employer",
+      "website_domain": "",
+      "email_domain": "",
+      "is_free_email": false,
+      "email_web_match": false,
+      "company_web_consistent": false,
+      "domain_resolves": true,
+      "risk_points": 0,
+      "summary": "Company information could not be independently verified (insufficient corporate contact records). External corporate verification service is unavailable. This uncertainty alone does not indicate fraud.",
+      "flags": [],
+      "trust_signals": [],
+      "uncertainty_warning": "External corporate verification service unavailable."
+    },
+    "explanation": {
+      "summary": "Classification is 'Insufficient Evidence': The job posting does not exhibit explicit fraudulent demands (such as upfront fee or credential requests), but also lacks sufficient verifiable corporate contact channels or active application infrastructure. AI-generated text alone is not evidence of fraud. Security indicators observed: ML textual model noted linguistic similarity to known scam corpora (37.6%); Domain/Identity: Company information could not be independently verified (insufficient corporate contact records). External corporate verification service is unavailable. This uncertainty alone does not indicate fraud.. Supporting integrity elements: Application URL utilizes secure TLS/HTTPS on an active, established domain; Comprehensive, detailed job responsibilities and qualification criteria.",
+      "narrative_points": [
+        "Classification is 'Insufficient Evidence': The job posting does not exhibit explicit fraudulent demands (such as upfront fee or credential requests), but also lacks sufficient verifiable corporate contact channels or active application infrastructure. AI-generated text alone is not evidence of fraud.",
+        "Security indicators observed: ML textual model noted linguistic similarity to known scam corpora (37.6%); Domain/Identity: Company information could not be independently verified (insufficient corporate contact records). External corporate verification service is unavailable. This uncertainty alone does not indicate fraud..",
+        "Supporting integrity elements: Application URL utilizes secure TLS/HTTPS on an active, established domain; Comprehensive, detailed job responsibilities and qualification criteria."
+      ],
+      "top_risk_tokens": [
+        [
+          "your",
+          0.183
+        ],
+        [
+          "from",
+          0.08
+        ],
+        [
+          "training",
+          0.069
+        ],
+        [
+          "our",
+          0.069
+        ],
+        [
+          "junior",
+          0.055
+        ],
+        [
+          "the",
+          0.053
+        ]
+      ],
+      "top_trust_tokens": [
+        [
+          "knowledge",
+          0.07
+        ],
+        [
+          "knowledge of",
+          0.07
+        ],
+        [
+          "and",
+          0.066
+        ],
+        [
+          "of",
+          0.066
+        ],
+        [
+          "in",
+          0.059
+        ],
+        [
+          "team",
+          0.056
+        ],
+        [
+          "with",
+          0.055
+        ],
+        [
+          "administration",
+          0.051
+        ]
+      ],
+      "disclaimer": "Notice: Feature importance, ML probabilities, and risk assessments represent probabilistic decision-support insights based on machine learning and heuristic cybersecurity rules. None of the outcomes (Likely Genuine, Suspicious — Further Verification Required, Insufficient Evidence) is an absolute legal guarantee of authenticity or fraud."
+    },
+    "id": "b79cde26-1c64-4968-a501-bee01f2d2e1a",
+    "created_at": "2026-10-27T15:55:17.422477Z",
+    "updated_at": "2026-10-27T15:55:17.422477Z"
+  }
+]

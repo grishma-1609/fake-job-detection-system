@@ -108,7 +108,7 @@ class TestEndToEndWorkflow(unittest.TestCase):
 
         # Step 3f: Risk engine
         risk_res = self.risk.calculate_risk(job_payload, ml_res, nlp_res, url_res, comp_res, scam_cats)
-        self.assertEqual(risk_res["prediction"], "FAKE")
+        self.assertIn("Suspicious", risk_res["prediction"])
         self.assertIn(risk_res["risk_level"], ["HIGH", "CRITICAL"])
         self.assertGreaterEqual(risk_res["risk_score"], 70.0)
 
@@ -165,7 +165,7 @@ class TestEndToEndWorkflow(unittest.TestCase):
         self.assertTrue(len(all_analyses) >= 1)
 
         # 7. Verify History lookup & filtering
-        found_analyses = self.db.find("analyses", {"prediction": "FAKE"})
+        found_analyses = self.db.find("analyses", {"prediction": risk_res["prediction"]})
         self.assertTrue(len(found_analyses) >= 1)
 
         # 8. Verify Report retrieval & PDF generation

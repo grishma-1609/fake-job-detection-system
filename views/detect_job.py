@@ -322,16 +322,42 @@ def render_detect_job():
         level = res.get("risk_level", "LOW")
         conf = float(res.get("confidence", 0))
 
+        # Color mapping for the 3 distinct outcomes
+        verdict_color = "#10B981" if pred == "Likely Genuine" else "#EF4444" if "Suspicious" in pred else "#3B82F6"
+
         v1, v2, v3 = st.columns([1.5, 1, 1])
         with v1:
             st.markdown(render_risk_badge_html(level, score), unsafe_allow_html=True)
-            st.markdown(f"<h3 style='margin-top: 8px;'>Verdict: <span style='color: {'#EF4444' if pred == 'FAKE' else '#F59E0B' if pred == 'SUSPICIOUS' else '#10B981'};'>{pred}</span></h3>", unsafe_allow_html=True)
+            st.markdown(f"<h3 style='margin-top: 8px;'>Verdict: <span style='color: {verdict_color};'>{pred}</span></h3>", unsafe_allow_html=True)
 
         with v2:
             st.metric("Threat Score", f"{score:.0f} / 100", delta=f"{level} Risk", delta_color="inverse" if level in ("HIGH", "CRITICAL") else "normal")
 
         with v3:
-            st.metric("Model Confidence", f"{conf:.1f}%")
+            st.metric("Assessment Confidence", f"{conf:.1f}%")
+
+        # Explicit non-guarantee disclaimer (Requirement 6)
+        st.info(
+            "ℹ️ **Evaluation Notice:** This classification is a cybersecurity decision-support assessment based on "
+            "documented indicators and available evidence. None of the outcomes (Likely Genuine, Suspicious — Further Verification Required, Insufficient Evidence) "
+            "is an absolute guarantee of authenticity or fraud."
+        )
+
+        # 4 Separated Assessment Dimensions (Requirement 3)
+        st.markdown("#### 🔍 Separated Assessment Dimensions")
+        dim1, dim2, dim3, dim4 = st.columns(4)
+        ml_p = res.get("ml_result", {}).get("fraud_probability", 0.0)
+        url_val = res.get("url_analysis", {}).get("url_validity", "No URL Provided")
+        comp_stat = res.get("company_verification", {}).get("verification_status", "UNVERIFIED")
+
+        with dim1:
+            st.metric("1. ML Text Probability", f"{ml_p*100:.1f}%", help="Probabilistic text deception score from ML model")
+        with dim2:
+            st.metric("2. URL Validity", url_val[:18] + ("..." if len(url_val) > 18 else ""), help=f"Full status: {url_val}")
+        with dim3:
+            st.metric("3. Company Status", comp_stat, help="Corporate identity cross-verification status")
+        with dim4:
+            st.metric("4. Documented Risk", f"{score:.0f} pts", help="Risk calculated strictly from documented indicators")
 
         # Scam Typologies Pills
         scam_cats = res.get("scam_categories", [])
@@ -420,16 +446,19 @@ def render_detect_job():
             st.caption(exp.get("disclaimer", ""))
 
         with t_url:
-            st.markdown("##### Application URL Inspection")
+            st.markdown("##### Application URL Inspection (Separated Dimension)")
             url_info = res.get("url_analysis", {})
             if url_info and url_info.get("analyzed"):
                 u1, u2, u3 = st.columns(3)
-                u1.metric("TLS/HTTPS Active", "Yes" if url_info.get("https_active") else "No Insecure")
+                u1.metric("TLS/HTTPS Active", "Yes" if url_info.get("https_active") else "Insecure / HTTP")
                 u2.metric("URL Shortened", "Yes (Masked)" if url_info.get("is_shortened") else "No")
-                u3.metric("Free Form Service", "Yes (High Risk)" if url_info.get("is_free_form") else "No")
+                u3.metric("Reserved Domain", "Yes (.example / RFC)" if url_info.get("is_reserved_domain") else "No")
 
+                st.write(f"**URL Validity Classification:** `{url_info.get('url_validity', 'Analyzed')}`")
+                if url_info.get("url_validity_details"):
+                    st.info(f"ℹ️ **URL Status Details:** {url_info.get('url_validity_details')}")
                 st.write(f"**Target Domain:** `{url_info.get('domain')}`")
-                st.write(f"**Safe Probe Status:** `{url_info.get('network_status')}`")
+                st.write(f"**Network Probe Result:** `{url_info.get('network_status')}`")
                 if url_info.get("flags"):
                     for uf in url_info["flags"]:
                         st.markdown(f"<div class='flag-item'>⚠️ {uf}</div>", unsafe_allow_html=True)
@@ -437,8 +466,9 @@ def render_detect_job():
                 st.write("`URL analysis unavailable` (No valid URL provided or probe skipped)")
 
         with t_comp:
-            st.markdown("##### Company & Recruiter Identity Cross-Check")
+            st.markdown("##### Company & Recruiter Identity Cross-Check (Separated Dimension)")
             comp_info = res.get("company_verification", {})
+            st.write(f"**Verification Status:** `{comp_info.get('verification_status', 'UNVERIFIED')}`")
             st.write(f"**Claimed Company:** {comp_info.get('company_name') or 'N/A'}")
             st.write(f"**Website Domain:** `{comp_info.get('website_domain') or 'None'}`")
             st.write(f"**Recruiter Email Domain:** `{comp_info.get('email_domain') or 'None'}`")
@@ -454,9 +484,9 @@ def render_detect_job():
         with t_advisory:
             st.markdown("##### Recommended Cybersecurity Action")
             action = res.get("recommended_action", "")
-            if pred == "FAKE":
+            if "Suspicious" in pred or pred == "FAKE":
                 st.error(f"🛑 **ACTION REQUIRED:** {action}")
-            elif pred == "SUSPICIOUS":
+            elif pred == "Insufficient Evidence":
                 st.warning(f"⚠️ **ACTION REQUIRED:** {action}")
             else:
                 st.success(f"✅ **GUIDANCE:** {action}")

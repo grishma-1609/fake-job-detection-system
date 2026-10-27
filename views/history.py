@@ -46,7 +46,11 @@ def render_history():
     with s_col2:
         filter_level = st.selectbox("Risk Level", ["All Levels", "CRITICAL", "HIGH", "MEDIUM", "LOW"], key="hist_lvl")
     with s_col3:
-        filter_pred = st.selectbox("Prediction", ["All Predictions", "FAKE", "SUSPICIOUS", "GENUINE"], key="hist_pred")
+        filter_pred = st.selectbox(
+            "Outcome",
+            ["All Outcomes", "Likely Genuine", "Suspicious — Further Verification Required", "Insufficient Evidence"],
+            key="hist_pred"
+        )
 
     # Apply Filters
     filtered_records = []
@@ -54,7 +58,7 @@ def render_history():
         job_data = r.get("job_data", {})
         title = str(job_data.get("title", "")).lower()
         company = str(job_data.get("company", "")).lower()
-        pred = str(r.get("prediction", "")).upper()
+        pred = str(r.get("prediction", "")).strip()
         lvl = str(r.get("risk_level", "")).upper()
 
         # Text match
@@ -67,9 +71,16 @@ def render_history():
         if filter_level != "All Levels" and lvl != filter_level:
             continue
 
-        # Pred match
-        if filter_pred != "All Predictions" and pred != filter_pred:
-            continue
+        # Outcome match (with backward compatibility)
+        if filter_pred != "All Outcomes":
+            p_norm = pred.upper()
+            f_norm = filter_pred.upper()
+            if f_norm == "LIKELY GENUINE" and p_norm not in ("LIKELY GENUINE", "GENUINE"):
+                continue
+            elif "SUSPICIOUS" in f_norm and "SUSPICIOUS" not in p_norm and p_norm != "FAKE":
+                continue
+            elif f_norm == "INSUFFICIENT EVIDENCE" and p_norm not in ("INSUFFICIENT EVIDENCE", "UNKNOWN"):
+                continue
 
         filtered_records.append(r)
 
@@ -91,7 +102,8 @@ def render_history():
         created = format_timestamp(record.get("created_at"))
         scam_cats = record.get("scam_categories", [])
 
-        with st.expander(f"{'🚨' if pred == 'FAKE' else '⚠️' if pred == 'SUSPICIOUS' else '✅'} {title} — {company} ({score:.0f}/100 {level} RISK) - {created}"):
+        icon = "🚨" if ("Suspicious" in pred or pred == "FAKE") else "ℹ️" if pred == "Insufficient Evidence" else "✅"
+        with st.expander(f"{icon} {title} — {company} ({score:.0f}/100 {level} RISK) - {created}"):
             col_a, col_b = st.columns([3, 1])
 
             with col_a:

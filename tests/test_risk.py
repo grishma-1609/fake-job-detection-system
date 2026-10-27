@@ -42,7 +42,7 @@ class TestRiskEngineAndScamClassifier(unittest.TestCase):
             job_data, ml_result, nlp_features, url_analysis, company_analysis, scam_cats
         )
 
-        self.assertEqual(risk_res["prediction"], "FAKE")
+        self.assertIn("Suspicious", risk_res["prediction"])
         self.assertIn(risk_res["risk_level"], ["HIGH", "CRITICAL"])
         self.assertGreaterEqual(risk_res["risk_score"], 70.0)
         self.assertGreaterEqual(len(risk_res["red_flags"]), 2)
@@ -60,15 +60,15 @@ class TestRiskEngineAndScamClassifier(unittest.TestCase):
         }
         ml_result = {"fraud_probability": 0.05}
         nlp_features = {"word_count": 140, "urgency_score": 0.0, "detected_phrases": []}
-        url_analysis = {"analyzed": True, "https_active": True, "is_safe": True, "risk_points": 0, "flags": []}
-        company_analysis = {"risk_points": 0, "flags": [], "trust_signals": ["Official corporate domain"]}
+        url_analysis = {"analyzed": True, "https_active": True, "is_safe": True, "is_live_valid": True, "risk_points": 0, "flags": []}
+        company_analysis = {"verification_status": "VERIFIED", "risk_points": 0, "flags": [], "trust_signals": ["Official corporate domain", "Corporate email matches website"]}
         scam_cats = []
 
         risk_res = self.risk_engine.calculate_risk(
             job_data, ml_result, nlp_features, url_analysis, company_analysis, scam_cats
         )
 
-        self.assertEqual(risk_res["prediction"], "GENUINE")
+        self.assertEqual(risk_res["prediction"], "Likely Genuine")
         self.assertEqual(risk_res["risk_level"], "LOW")
         self.assertLess(risk_res["risk_score"], 30.0)
         self.assertIn("SAFE TO PROCEED", risk_res["recommended_action"])

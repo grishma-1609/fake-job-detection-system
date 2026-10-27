@@ -74,43 +74,48 @@ class ExplainabilityEngine:
             for phrase in nlp_features.get("detected_phrases", []):
                 top_risk_tokens.append((phrase, 0.45))
 
-        # 3. Construct natural language explanations ("Why this posting was flagged")
+        # 3. Construct natural language explanations ("Why this outcome was reached")
         narrative_points: List[str] = []
+
+        if ml_prediction == "Insufficient Evidence":
+            narrative_points.append(
+                "Classification is 'Insufficient Evidence': The job posting does not exhibit explicit fraudulent "
+                "demands (such as upfront fee or credential requests), but also lacks sufficient verifiable corporate "
+                "contact channels or active application infrastructure. AI-generated text alone is not evidence of fraud."
+            )
+        elif "Suspicious" in str(ml_prediction):
+            narrative_points.append(
+                "Classification is 'Suspicious — Further Verification Required': The posting triggered documented cybersecurity fraud rules, deceptive indicators, or conflicting evidence."
+            )
+        else:
+            narrative_points.append(
+                "Classification is 'Likely Genuine': The posting presents consistent corporate identity, verifiable domains, and no fraud indicators."
+            )
 
         if ml_probability >= 0.70:
             narrative_points.append(
-                f"Machine Learning text classifier assigned a high fraud probability ({ml_probability*100:.1f}%) "
-                "based on linguistic patterns learned from historical recruitment scam corpora."
+                f"ML text classifier noted elevated stylistic similarity ({ml_probability*100:.1f}%) to historical scam text patterns."
             )
-        elif ml_probability <= 0.30:
+        elif ml_probability <= 0.35:
             narrative_points.append(
-                f"Machine Learning classifier identified authentic job structure and vocabulary "
-                f"with { (1.0 - ml_probability)*100:.1f}% genuine probability."
+                f"ML model observed conventional professional vocabulary ({ (1.0 - ml_probability)*100:.1f}% genuine text score)."
             )
 
         if nlp_features.get("detected_phrases"):
             phrases_str = ", ".join([f"'{p}'" for p in nlp_features["detected_phrases"][:4]])
             narrative_points.append(f"Identified high-risk recruitment fraud phrases: {phrases_str}.")
 
-        if nlp_features.get("uppercase_ratio", 0) > 0.25:
-            narrative_points.append("Abnormally high capitalization frequency detected, typical of spam/urgency hooks.")
-
         if scam_categories:
             cats_str = ", ".join(scam_categories[:3])
-            narrative_points.append(f"Behavioral rules matched known scam profiles: {cats_str}.")
+            narrative_points.append(f"Matched threat typologies: {cats_str}.")
 
         if red_flags:
             top_flags = "; ".join(red_flags[:3])
-            narrative_points.append(f"Critical security discrepancies: {top_flags}.")
+            narrative_points.append(f"Security indicators observed: {top_flags}.")
 
         if trust_indicators:
             top_trust = "; ".join(trust_indicators[:2])
-            narrative_points.append(f"Verifiable integrity elements: {top_trust}.")
-
-        if not narrative_points:
-            narrative_points.append(
-                "No strong fraudulent indicators detected. Job posting vocabulary conforms to standard corporate postings."
-            )
+            narrative_points.append(f"Supporting integrity elements: {top_trust}.")
 
         summary_explanation = " ".join(narrative_points)
 
@@ -120,8 +125,8 @@ class ExplainabilityEngine:
             "top_risk_tokens": top_risk_tokens,
             "top_trust_tokens": top_trust_tokens,
             "disclaimer": (
-                "Notice: Feature importance and risk scores represent probabilistic decision-support "
-                "insights based on machine learning and heuristic cybersecurity rules. "
-                "They should not be construed as absolute legal proof of fraudulent intent."
+                "Notice: Feature importance, ML probabilities, and risk assessments represent probabilistic "
+                "decision-support insights based on machine learning and heuristic cybersecurity rules. "
+                "None of the outcomes (Likely Genuine, Suspicious — Further Verification Required, Insufficient Evidence) is an absolute legal guarantee of authenticity or fraud."
             ),
         }

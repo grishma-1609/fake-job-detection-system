@@ -35,11 +35,11 @@ def render_dashboard():
                 st.rerun()
         return
 
-    # Aggregate Metrics Calculation
+    # Aggregate Metrics Calculation (Supports new and historical labels)
     total_analyzed = len(analyses)
-    fake_count = sum(1 for a in analyses if str(a.get("prediction")).upper() == "FAKE")
-    suspicious_count = sum(1 for a in analyses if str(a.get("prediction")).upper() == "SUSPICIOUS")
-    genuine_count = sum(1 for a in analyses if str(a.get("prediction")).upper() == "GENUINE")
+    suspicious_count = sum(1 for a in analyses if str(a.get("prediction")).upper() in ("SUSPICIOUS", "FAKE"))
+    genuine_count = sum(1 for a in analyses if str(a.get("prediction")).upper() in ("LIKELY GENUINE", "GENUINE"))
+    insufficient_count = sum(1 for a in analyses if str(a.get("prediction")).upper() in ("INSUFFICIENT EVIDENCE", "UNKNOWN"))
 
     critical_and_high = sum(
         1 for a in analyses if a.get("risk_level") in ("CRITICAL", "HIGH")
@@ -53,36 +53,36 @@ def render_dashboard():
     with m1:
         st.markdown(f"""
         <div class="stat-card">
-            <div class="stat-label">Total Analyzed</div>
+            <div class="stat-label">Total Submissions</div>
             <div class="stat-value" style="color: #00F0FF;">{total_analyzed}</div>
-            <div class="stat-subtext">Cumulative submissions</div>
+            <div class="stat-subtext">Evaluated postings</div>
         </div>
         """, unsafe_allow_html=True)
 
     with m2:
         st.markdown(f"""
         <div class="stat-card">
-            <div class="stat-label">Scams Flagged</div>
-            <div class="stat-value" style="color: #EF4444;">{fake_count}</div>
-            <div class="stat-subtext">Confirmed fraudulent</div>
+            <div class="stat-label">Suspicious</div>
+            <div class="stat-value" style="color: #EF4444;">{suspicious_count}</div>
+            <div class="stat-subtext">Documented threats</div>
         </div>
         """, unsafe_allow_html=True)
 
     with m3:
         st.markdown(f"""
         <div class="stat-card">
-            <div class="stat-label">Suspicious</div>
-            <div class="stat-value" style="color: #F59E0B;">{suspicious_count}</div>
-            <div class="stat-subtext">Elevated anomalies</div>
+            <div class="stat-label">Insufficient Evidence</div>
+            <div class="stat-value" style="color: #3B82F6;">{insufficient_count}</div>
+            <div class="stat-subtext">Unverified / Inconclusive</div>
         </div>
         """, unsafe_allow_html=True)
 
     with m4:
         st.markdown(f"""
         <div class="stat-card">
-            <div class="stat-label">Genuine Postings</div>
+            <div class="stat-label">Likely Genuine</div>
             <div class="stat-value" style="color: #10B981;">{genuine_count}</div>
-            <div class="stat-subtext">Authentic verified</div>
+            <div class="stat-subtext">Verifiable corporate signals</div>
         </div>
         """, unsafe_allow_html=True)
 
@@ -101,11 +101,11 @@ def render_dashboard():
     c1, c2 = st.columns(2)
 
     with c1:
-        # Donut Chart: Verdict Breakdown
+        # Donut Chart: Verdict Breakdown (Likely Genuine, Suspicious — Further Verification Required, Insufficient Evidence)
         verdict_counts = {
-            "Fake / Scam": fake_count,
-            "Suspicious": suspicious_count,
-            "Genuine": genuine_count,
+            "Suspicious — Further Verification Required": suspicious_count,
+            "Insufficient Evidence": insufficient_count,
+            "Likely Genuine": genuine_count,
         }
         fig_donut = px.pie(
             values=list(verdict_counts.values()),
@@ -113,9 +113,9 @@ def render_dashboard():
             hole=0.55,
             color=list(verdict_counts.keys()),
             color_discrete_map={
-                "Fake / Scam": "#EF4444",
-                "Suspicious": "#F59E0B",
-                "Genuine": "#10B981",
+                "Suspicious — Further Verification Required": "#EF4444",
+                "Insufficient Evidence": "#3B82F6",
+                "Likely Genuine": "#10B981",
             },
             title="Classification Distribution"
         )

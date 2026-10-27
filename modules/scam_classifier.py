@@ -32,10 +32,10 @@ class ScamClassifier:
             r"@(?:gmail|yahoo|hotmail|outlook|mail)\.com",
         ],
         "Unrealistic Job Offer": [
-            r"\b(?:no\s+experience|no\s+skills|no\s+interview|instant\s+hire|guaranteed\s+job|guaranteed\s+payout|guaranteed\s+income)\b",
+            r"\b(?:no\s+(?:prior\s+)?experience\s+(?:needed|required)\s+(?:to\s+earn|\$\d+)|no\s+interview\s+required|instant\s+hire|guaranteed\s+job|guaranteed\s+payout|guaranteed\s+income)\b",
             r"(?:(?:earn\s+)?\$\d{2,3}(?:,\d{3})*\s*(?:per\s+day|daily|weekly|a\s+day|hourly|per\s+hour))\b",
-            r"\b(?:make\s+thousands|financial\s+freedom|work\s+1\s+hour\s+a\s+day)\b",
-            r"\b(?:100%\s+guaranteed|risk\s+free\s+income)\b",
+            r"\b(?:make\s+thousands\s+weekly|financial\s+freedom|work\s+1\s+hour\s+a\s+day)\b",
+            r"\b(?:100%\s+guaranteed\s+income|risk\s+free\s+income)\b",
         ],
         "Suspicious Application Link": [
             r"\b(?:bit\.ly|tinyurl\.com|t\.co|shorturl)\b",
@@ -52,6 +52,7 @@ class ScamClassifier:
         """
         Analyzes textual content and metadata to identify all applicable scam typologies.
         Returns a list of matching scam category strings.
+        Does not falsely classify entry-level graduate roles or reserved domains as scams.
         """
         composite_text = " ".join([
             str(job_data.get("title", "")),
@@ -75,7 +76,8 @@ class ScamClassifier:
 
         # 2. URL analysis cross-checks
         if url_analysis and url_analysis.get("analyzed"):
-            if url_analysis.get("is_shortened") or url_analysis.get("is_free_form") or not url_analysis.get("is_safe"):
+            # Obfuscated or free form hosts are suspicious application links
+            if url_analysis.get("is_shortened") or url_analysis.get("is_ip_literal"):
                 if "Suspicious Application Link" not in matched_categories:
                     matched_categories.append("Suspicious Application Link")
             if url_analysis.get("is_free_form"):
@@ -91,13 +93,13 @@ class ScamClassifier:
 
         # 4. Fallback categorization if flagged but no specific typology
         if not matched_categories and (
-            (url_analysis and not url_analysis.get("is_safe")) or
-            (company_analysis and company_analysis.get("risk_points", 0) > 25)
+            (url_analysis and not url_analysis.get("is_safe") and not url_analysis.get("is_reserved_domain") and url_analysis.get("risk_points", 0) >= 30) or
+            (company_analysis and company_analysis.get("risk_points", 0) >= 25)
         ):
             matched_categories.append("Other Suspicious Recruitment Activity")
 
-        # If multiple scam types are present, mark baseline fake recruitment
-        if len(matched_categories) >= 2 and "Fake Recruitment Scam" not in matched_categories:
-            matched_categories.insert(0, "Fake Recruitment Scam")
+        # If multiple scam types are present, mark baseline threat
+        if len(matched_categories) >= 2 and "Suspicious Recruitment Threat Pattern" not in matched_categories:
+            matched_categories.insert(0, "Suspicious Recruitment Threat Pattern")
 
         return matched_categories

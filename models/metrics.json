@@ -1,13 +1,24 @@
 {
   "dataset_stats": {
     "total_records": 1200,
-    "train_samples": 960,
-    "test_samples": 240,
-    "fraudulent_samples": 550,
-    "genuine_samples": 650,
+    "train_samples": 840,
+    "validation_samples": 180,
+    "test_samples": 180,
+    "fraudulent_samples": 400,
+    "genuine_samples": 800,
     "features_extracted": 4000
   },
+  "class_mapping": {
+    "0": "genuine",
+    "1": "fraudulent",
+    "model_classes": [
+      0,
+      1
+    ],
+    "fraud_class_idx": 1
+  },
   "selected_model": "Logistic Regression",
+  "optimal_threshold": 0.2,
   "models_evaluated": {
     "Logistic Regression": {
       "accuracy": 1.0,
@@ -15,11 +26,23 @@
       "recall": 1.0,
       "f1_score": 1.0,
       "roc_auc": 1.0,
+      "optimal_threshold": 0.2,
+      "false_negative_count": 0,
+      "true_positive_count": 60,
       "confusion_matrix": {
-        "tn": 130,
+        "tn": 120,
         "fp": 0,
         "fn": 0,
-        "tp": 110
+        "tp": 60
+      },
+      "baseline_threshold_0_50": {
+        "recall": 1.0,
+        "confusion_matrix": {
+          "tn": 120,
+          "fp": 0,
+          "fn": 0,
+          "tp": 60
+        }
       }
     },
     "Random Forest": {
@@ -28,11 +51,23 @@
       "recall": 1.0,
       "f1_score": 1.0,
       "roc_auc": 1.0,
+      "optimal_threshold": 0.2,
+      "false_negative_count": 0,
+      "true_positive_count": 60,
       "confusion_matrix": {
-        "tn": 130,
+        "tn": 120,
         "fp": 0,
         "fn": 0,
-        "tp": 110
+        "tp": 60
+      },
+      "baseline_threshold_0_50": {
+        "recall": 1.0,
+        "confusion_matrix": {
+          "tn": 120,
+          "fp": 0,
+          "fn": 0,
+          "tp": 60
+        }
       }
     },
     "Multinomial Naive Bayes": {
@@ -41,11 +76,23 @@
       "recall": 1.0,
       "f1_score": 1.0,
       "roc_auc": 1.0,
+      "optimal_threshold": 0.2,
+      "false_negative_count": 0,
+      "true_positive_count": 60,
       "confusion_matrix": {
-        "tn": 130,
+        "tn": 120,
         "fp": 0,
         "fn": 0,
-        "tp": 110
+        "tp": 60
+      },
+      "baseline_threshold_0_50": {
+        "recall": 1.0,
+        "confusion_matrix": {
+          "tn": 120,
+          "fp": 0,
+          "fn": 0,
+          "tp": 60
+        }
       }
     },
     "Linear SVM": {
@@ -54,11 +101,23 @@
       "recall": 1.0,
       "f1_score": 1.0,
       "roc_auc": 1.0,
+      "optimal_threshold": 0.2,
+      "false_negative_count": 0,
+      "true_positive_count": 60,
       "confusion_matrix": {
-        "tn": 130,
+        "tn": 120,
         "fp": 0,
         "fn": 0,
-        "tp": 110
+        "tp": 60
+      },
+      "baseline_threshold_0_50": {
+        "recall": 1.0,
+        "confusion_matrix": {
+          "tn": 120,
+          "fp": 0,
+          "fn": 0,
+          "tp": 60
+        }
       }
     },
     "Gradient Boosting": {
@@ -67,11 +126,23 @@
       "recall": 1.0,
       "f1_score": 1.0,
       "roc_auc": 1.0,
+      "optimal_threshold": 0.2,
+      "false_negative_count": 0,
+      "true_positive_count": 60,
       "confusion_matrix": {
-        "tn": 130,
+        "tn": 120,
         "fp": 0,
         "fn": 0,
-        "tp": 110
+        "tp": 60
+      },
+      "baseline_threshold_0_50": {
+        "recall": 1.0,
+        "confusion_matrix": {
+          "tn": 120,
+          "fp": 0,
+          "fn": 0,
+          "tp": 60
+        }
       }
     }
   }
